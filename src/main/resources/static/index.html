@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>PayTrack - Employee Salary Dashboard</title>
+
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+<!-- Sidebar -->
+
+<div class="sidebar">
+
+    <h2>PayTrack</h2>
+
+    <nav>
+        <a href="#" class="active">Dashboard</a>
+        <a href="#employees">Employees</a>
+        <a href="#analytics">Analytics</a>
+    </nav>
+
+</div>
+
+
+<!-- Main Content -->
+
+<div class="main">
+
+    <header>
+
+        <h1>Employee Salary Dashboard</h1>
+
+        <p>Employee payroll and salary analytics</p>
+
+    </header>
+
+
+    <!-- Dashboard Cards -->
+
+    <section class="cards">
+
+        <div class="card">
+
+            <h3>Total Employees</h3>
+
+            <p id="totalEmployees">
+                Loading...
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Total Payroll</h3>
+
+            <p id="totalPayroll">
+                Loading...
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Average Salary</h3>
+
+            <p id="averageSalary">
+                Loading...
+            </p>
+
+        </div>
+
+
+        <div class="card">
+
+            <h3>Median Salary</h3>
+
+            <p id="medianSalary">
+                Loading...
+            </p>
+
+        </div>
+
+    </section>
+
+
+    <!-- Employees Section -->
+
+  <section id="employees" class="section">
+
+    <div class="section-header">
+
+        <div>
+            <h2>Employees</h2>
+            <p>Manage employee records and salaries</p>
+        </div>
+
+        <button class="add-button" onclick="openAddEmployeeForm()">
+            + Add Employee
+        </button>
+
+    </div>
+
+
+    <!-- Search and Filters -->
+
+    <div class="filters">
+
+        <input
+            type="text"
+            id="search"
+            placeholder="Search employee..."
+        >
+
+        <input
+            type="text"
+            id="country"
+            placeholder="Country"
+        >
+
+        <input
+            type="text"
+            id="department"
+            placeholder="Department"
+        >
+
+        <button onclick="loadEmployees()">
+            Search
+        </button>
+
+    </div>
+
+
+    <!-- Employee Table -->
+
+    <div class="table-container">
+
+        <table>
+
+            <thead>
+
+            <tr>
+
+                <th>ID</th>
+                <th>Employee Code</th>
+                <th>Name</th>
+                <th>Country</th>
+                <th>Department</th>
+                <th>Salary</th>
+                <th>Currency</th>
+                <th>Actions</th>
+
+            </tr>
+
+            </thead>
+
+            <tbody id="employeeTable"></tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+
+<!-- Add Employee Modal -->
+
+<div id="employeeModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Add Employee</h2>
+
+            <span class="close" onclick="closeEmployeeForm()">
+                &times;
+            </span>
+
+        </div>
+
+        <form id="employeeForm" onsubmit="addEmployee(event)">
+
+            <input
+                type="text"
+                id="employeeCode"
+                placeholder="Employee Code"
+                required
+            >
+
+            <input
+                type="text"
+                id="employeeName"
+                placeholder="Employee Name"
+                required
+            >
+
+            <input
+                type="text"
+                id="employeeCountry"
+                placeholder="Country"
+                required
+            >
+
+            <input
+                type="text"
+                id="employeeDepartment"
+                placeholder="Department"
+                required
+            >
+
+            <input
+                type="number"
+                id="employeeSalary"
+                placeholder="Salary"
+                required
+            >
+
+            <input
+                type="text"
+                id="employeeCurrency"
+                placeholder="Currency"
+                value="INR"
+                maxlength="3"
+                required
+            >
+
+            <button type="submit">
+                Add Employee
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+<!-- Update Salary Modal -->
+
+<div id="salaryModal" class="modal">
+
+    <div class="modal-content">
+
+        <div class="modal-header">
+
+            <h2>Update Salary</h2>
+
+            <span class="close" onclick="closeSalaryForm()">
+                &times;
+            </span>
+
+        </div>
+
+        <form id="salaryForm" onsubmit="updateSalary(event)">
+
+            <input
+                type="number"
+                id="newSalary"
+                placeholder="Enter new salary"
+                required
+            >
+
+            <button type="submit">
+                Update Salary
+            </button>
+
+        </form>
+
+    </div>
+
+</div>
+
+
+    <!-- Analytics Section -->
+
+<section id="analytics" class="section">
+
+    <h2>Salary Analytics</h2>
+
+    <div class="analytics-grid">
+
+        <div class="analytics-card">
+            <h3>Highest Salary</h3>
+            <p id="highestSalary">Loading...</p>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Lowest Salary</h3>
+            <p id="lowestSalary">Loading...</p>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Salary Distribution</h3>
+            <div id="salaryDistribution"></div>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Payroll by Country</h3>
+            <div id="countryPayroll"></div>
+        </div>
+
+        <div class="analytics-card">
+            <h3>Payroll by Department</h3>
+            <div id="departmentPayroll"></div>
+        </div>
+
+    </div>
+
+</section>
+
+</div>
+
+
+<script src="app.js"></script>
+
+</body>
+
+</html>
